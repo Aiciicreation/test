@@ -1,0 +1,618 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>投信分析アプリ</title>
+    
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    
+    <!-- Chart.js -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <div class="container">
+            <a class="navbar-brand" href="#home">投信分析アプリ</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="#home">ホーム</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#dashboard">ダッシュボード</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#settings">設定</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <main class="container mt-4">
+        <!-- Home Section -->
+        <section id="home">
+            <div class="row">
+                <div class="col-12">
+                    <h1 class="mb-4">投信分析アプリ</h1>
+                    <p class="lead">5つのインデックスファンドの基準価額データを分析し、統計情報を提供します。</p>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-12">
+                    <div class="card">
+                        <div class="card-header">
+                            <h5 class="card-title">対象ファンド一覧</h5>
+                        </div>
+                        <div class="card-body">
+                            <div class="row">
+                                <div class="col-md-6 col-lg-4 mb-3">
+                                    <div class="card fund-card h-100">
+                                        <div class="card-body">
+                                            <h6 class="card-title">eMAXIS Slim 全世界株式</h6>
+                                            <p class="card-text">
+                                                <small class="text-muted">03311</small><br>
+                                                <small class="text-muted">三菱UFJ国際投信</small>
+                                            </p>
+                                            <a href="#fund-detail" class="btn btn-primary btn-sm">詳細を見る</a>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-6 col-lg-4 mb-3">
+                                    <div class="card fund-card h-100">
+                                        <div class="card-body">
+                                            <h6 class="card-title">eMAXIS Slim 先進国株式</h6>
+                                            <p class="card-text">
+                                                <small class="text-muted">03312</small><br>
+                                                <small class="text-muted">三菱UFJ国際投信</small>
+                                            </p>
+                                            <a href="#fund-detail" class="btn btn-primary btn-sm">詳細を見る</a>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-6 col-lg-4 mb-3">
+                                    <div class="card fund-card h-100">
+                                        <div class="card-body">
+                                            <h6 class="card-title">eMAXIS Slim 米国株式</h6>
+                                            <p class="card-text">
+                                                <small class="text-muted">09311</small><br>
+                                                <small class="text-muted">三菱UFJ国際投信</small>
+                                            </p>
+                                            <a href="#fund-detail" class="btn btn-primary btn-sm">詳細を見る</a>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-6 col-lg-4 mb-3">
+                                    <div class="card fund-card h-100">
+                                        <div class="card-body">
+                                            <h6 class="card-title">楽天・全世界株式</h6>
+                                            <p class="card-text">
+                                                <small class="text-muted">J0001</small><br>
+                                                <small class="text-muted">楽天投信投資顧問</small>
+                                            </p>
+                                            <a href="#fund-detail" class="btn btn-primary btn-sm">詳細を見る</a>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-6 col-lg-4 mb-3">
+                                    <div class="card fund-card h-100">
+                                        <div class="card-body">
+                                            <h6 class="card-title">SBI・全世界株式</h6>
+                                            <p class="card-text">
+                                                <small class="text-muted">S0001</small><br>
+                                                <small class="text-muted">SBI投信投資顧問</small>
+                                            </p>
+                                            <a href="#fund-detail" class="btn btn-primary btn-sm">詳細を見る</a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row mt-4">
+                <div class="col-md-6">
+                    <div class="card">
+                        <div class="card-header">
+                            <h5 class="card-title">機能概要</h5>
+                        </div>
+                        <div class="card-body">
+                            <ul class="list-group list-group-flush">
+                                <li class="list-group-item">
+                                    <strong>基準価額追跡</strong><br>
+                                    <small class="text-muted">毎日の基準価額を自動取得・保存</small>
+                                </li>
+                                <li class="list-group-item">
+                                    <strong>統計分析</strong><br>
+                                    <small class="text-muted">1%以上の上昇日数と95%信頼区間を計算</small>
+                                </li>
+                                <li class="list-group-item">
+                                    <strong>グラフ表示</strong><br>
+                                    <small class="text-muted">基準価額の推移をインタラクティブに表示</small>
+                                </li>
+                                <li class="list-group-item">
+                                    <strong>データエクスポート</strong><br>
+                                    <small class="text-muted">Excelファイルでデータをダウンロード</small>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="col-md-6">
+                    <div class="card">
+                        <div class="card-header">
+                            <h5 class="card-title">最新データ状況</h5>
+                        </div>
+                        <div class="card-body">
+                            <div id="data-status">
+                                <div class="row">
+                                    <div class="col-md-6 mb-2">
+                                        <div class="d-flex justify-content-between align-items-center">
+                                            <small class="text-muted">eMAXIS Slim 全世界株式</small>
+                                            <div>
+                                                <span class="badge bg-secondary">1,250件</span>
+                                                <small class="text-muted">2024-12-31</small>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6 mb-2">
+                                        <div class="d-flex justify-content-between align-items-center">
+                                            <small class="text-muted">eMAXIS Slim 先進国株式</small>
+                                            <div>
+                                                <span class="badge bg-secondary">1,248件</span>
+                                                <small class="text-muted">2024-12-31</small>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6 mb-2">
+                                        <div class="d-flex justify-content-between align-items-center">
+                                            <small class="text-muted">eMAXIS Slim 米国株式</small>
+                                            <div>
+                                                <span class="badge bg-secondary">1,252件</span>
+                                                <small class="text-muted">2024-12-31</small>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6 mb-2">
+                                        <div class="d-flex justify-content-between align-items-center">
+                                            <small class="text-muted">楽天・全世界株式</small>
+                                            <div>
+                                                <span class="badge bg-secondary">1,245件</span>
+                                                <small class="text-muted">2024-12-31</small>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6 mb-2">
+                                        <div class="d-flex justify-content-between align-items-center">
+                                            <small class="text-muted">SBI・全世界株式</small>
+                                            <div>
+                                                <span class="badge bg-secondary">1,240件</span>
+                                                <small class="text-muted">2024-12-31</small>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row mt-4">
+                <div class="col-12">
+                    <div class="card">
+                        <div class="card-header">
+                            <h5 class="card-title">クイック統計</h5>
+                        </div>
+                        <div class="card-body">
+                            <div id="quick-stats">
+                                <div class="row">
+                                    <div class="col-md-6 col-lg-4 mb-3">
+                                        <div class="stat-card">
+                                            <h6 class="mb-2">eMAXIS Slim 全世界株式</h6>
+                                            <div class="stat-value">85.2%</div>
+                                            <div class="stat-label">月1回以上1%上昇の確率</div>
+                                            <div class="confidence-interval">
+                                                95%信頼区間: 82.1% - 88.3%
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6 col-lg-4 mb-3">
+                                        <div class="stat-card">
+                                            <h6 class="mb-2">eMAXIS Slim 先進国株式</h6>
+                                            <div class="stat-value">87.5%</div>
+                                            <div class="stat-label">月1回以上1%上昇の確率</div>
+                                            <div class="confidence-interval">
+                                                95%信頼区間: 84.2% - 90.8%
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6 col-lg-4 mb-3">
+                                        <div class="stat-card">
+                                            <h6 class="mb-2">eMAXIS Slim 米国株式</h6>
+                                            <div class="stat-value">89.1%</div>
+                                            <div class="stat-label">月1回以上1%上昇の確率</div>
+                                            <div class="confidence-interval">
+                                                95%信頼区間: 86.3% - 91.9%
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6 col-lg-4 mb-3">
+                                        <div class="stat-card">
+                                            <h6 class="mb-2">楽天・全世界株式</h6>
+                                            <div class="stat-value">84.8%</div>
+                                            <div class="stat-label">月1回以上1%上昇の確率</div>
+                                            <div class="confidence-interval">
+                                                95%信頼区間: 81.5% - 88.1%
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6 col-lg-4 mb-3">
+                                        <div class="stat-card">
+                                            <h6 class="mb-2">SBI・全世界株式</h6>
+                                            <div class="stat-value">83.9%</div>
+                                            <div class="stat-label">月1回以上1%上昇の確率</div>
+                                            <div class="confidence-interval">
+                                                95%信頼区間: 80.4% - 87.4%
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Dashboard Section -->
+        <section id="dashboard" class="mt-5" style="display: none;">
+            <div class="row">
+                <div class="col-12">
+                    <h1 class="mb-4">ダッシュボード</h1>
+                    <p class="lead">すべてのファンドの統計情報を一覧表示します。</p>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-12">
+                    <div class="card">
+                        <div class="card-header">
+                            <h5 class="card-title">統計サマリー</h5>
+                        </div>
+                        <div class="card-body">
+                            <div id="summary-stats">
+                                <div class="row">
+                                    <div class="col-md-3">
+                                        <div class="stat-card">
+                                            <div class="stat-value">5</div>
+                                            <div class="stat-label">登録ファンド数</div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-3">
+                                        <div class="stat-card">
+                                            <div class="stat-value">86.1%</div>
+                                            <div class="stat-label">平均1%上昇(月1回以上)</div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-3">
+                                        <div class="stat-card">
+                                            <div class="stat-value">65.4%</div>
+                                            <div class="stat-label">平均1%上昇(月2回以上)</div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-3">
+                                        <div class="stat-card">
+                                            <div class="stat-value">72.3%</div>
+                                            <div class="stat-label">平均2%上昇(月1回以上)</div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row mt-4">
+                <div class="col-12">
+                    <div class="card">
+                        <div class="card-header">
+                            <h5 class="card-title">統計比較表</h5>
+                        </div>
+                        <div class="card-body">
+                            <div class="table-responsive">
+                                <table class="table table-striped table-hover">
+                                    <thead class="table-dark">
+                                        <tr>
+                                            <th>ファンド名</th>
+                                            <th>月1回以上1%上昇</th>
+                                            <th>月2回以上1%上昇</th>
+                                            <th>月1回以上2%上昇</th>
+                                            <th>データ期間</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td>
+                                                <strong>eMAXIS Slim 全世界株式</strong><br>
+                                                <small class="text-muted">03311</small>
+                                            </td>
+                                            <td>
+                                                <span class="text-primary">85.2%</span><br>
+                                                <small class="text-muted">(82.1% - 88.3%)</small>
+                                            </td>
+                                            <td>
+                                                <span class="text-success">64.8%</span><br>
+                                                <small class="text-muted">(60.5% - 69.1%)</small>
+                                            </td>
+                                            <td>
+                                                <span class="text-warning">71.5%</span><br>
+                                                <small class="text-muted">(67.2% - 75.8%)</small>
+                                            </td>
+                                            <td>
+                                                <span class="badge bg-secondary">60ヶ月</span>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                <strong>eMAXIS Slim 先進国株式</strong><br>
+                                                <small class="text-muted">03312</small>
+                                            </td>
+                                            <td>
+                                                <span class="text-primary">87.5%</span><br>
+                                                <small class="text-muted">(84.2% - 90.8%)</small>
+                                            </td>
+                                            <td>
+                                                <span class="text-success">67.2%</span><br>
+                                                <small class="text-muted">(62.8% - 71.6%)</small>
+                                            </td>
+                                            <td>
+                                                <span class="text-warning">74.1%</span><br>
+                                                <small class="text-muted">(69.7% - 78.5%)</small>
+                                            </td>
+                                            <td>
+                                                <span class="badge bg-secondary">60ヶ月</span>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                <strong>eMAXIS Slim 米国株式</strong><br>
+                                                <small class="text-muted">09311</small>
+                                            </td>
+                                            <td>
+                                                <span class="text-primary">89.1%</span><br>
+                                                <small class="text-muted">(86.3% - 91.9%)</small>
+                                            </td>
+                                            <td>
+                                                <span class="text-success">68.7%</span><br>
+                                                <small class="text-muted">(64.2% - 73.2%)</small>
+                                            </td>
+                                            <td>
+                                                <span class="text-warning">76.3%</span><br>
+                                                <small class="text-muted">(72.1% - 80.5%)</small>
+                                            </td>
+                                            <td>
+                                                <span class="badge bg-secondary">60ヶ月</span>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                <strong>楽天・全世界株式</strong><br>
+                                                <small class="text-muted">J0001</small>
+                                            </td>
+                                            <td>
+                                                <span class="text-primary">84.8%</span><br>
+                                                <small class="text-muted">(81.5% - 88.1%)</small>
+                                            </td>
+                                            <td>
+                                                <span class="text-success">63.5%</span><br>
+                                                <small class="text-muted">(59.1% - 67.9%)</small>
+                                            </td>
+                                            <td>
+                                                <span class="text-warning">70.2%</span><br>
+                                                <small class="text-muted">(65.8% - 74.6%)</small>
+                                            </td>
+                                            <td>
+                                                <span class="badge bg-secondary">48ヶ月</span>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                <strong>SBI・全世界株式</strong><br>
+                                                <small class="text-muted">S0001</small>
+                                            </td>
+                                            <td>
+                                                <span class="text-primary">83.9%</span><br>
+                                                <small class="text-muted">(80.4% - 87.4%)</small>
+                                            </td>
+                                            <td>
+                                                <span class="text-success">62.8%</span><br>
+                                                <small class="text-muted">(58.3% - 67.3%)</small>
+                                            </td>
+                                            <td>
+                                                <span class="text-warning">69.4%</span><br>
+                                                <small class="text-muted">(64.9% - 73.9%)</small>
+                                            </td>
+                                            <td>
+                                                <span class="badge bg-secondary">42ヶ月</span>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Settings Section -->
+        <section id="settings" class="mt-5" style="display: none;">
+            <div class="row">
+                <div class="col-12">
+                    <h1 class="mb-4">設定</h1>
+                    <p class="lead">アプリケーションの設定を管理します。</p>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="card">
+                        <div class="card-header">
+                            <h5 class="card-title">データ更新設定</h5>
+                        </div>
+                        <div class="card-body">
+                            <form>
+                                <div class="mb-3">
+                                    <label for="update-frequency" class="form-label">更新頻度</label>
+                                    <select class="form-select" id="update-frequency">
+                                        <option value="daily">毎日</option>
+                                        <option value="weekly">毎週</option>
+                                        <option value="monthly">毎月</option>
+                                    </select>
+                                </div>
+                                <div class="mb-3">
+                                    <label for="update-time" class="form-label">更新時刻</label>
+                                    <input type="time" class="form-control" id="update-time" value="09:00">
+                                </div>
+                                <button type="submit" class="btn btn-primary">保存</button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="card">
+                        <div class="card-header">
+                            <h5 class="card-title">通知設定</h5>
+                        </div>
+                        <div class="card-body">
+                            <form>
+                                <div class="mb-3">
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="checkbox" id="email-notifications">
+                                        <label class="form-check-label" for="email-notifications">
+                                            メール通知を有効にする
+                                        </label>
+                                    </div>
+                                </div>
+                                <div class="mb-3">
+                                    <label for="email-address" class="form-label">メールアドレス</label>
+                                    <input type="email" class="form-control" id="email-address" placeholder="your@email.com">
+                                </div>
+                                <button type="submit" class="btn btn-primary">保存</button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-dark text-light text-center py-3 mt-5">
+        <div class="container">
+            <p>&copy; 2024 投信分析アプリ. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
+    
+    <!-- Custom JavaScript -->
+    <script>
+        // Navigation handling
+        document.addEventListener('DOMContentLoaded', function() {
+            const navLinks = document.querySelectorAll('.nav-link');
+            const sections = document.querySelectorAll('section');
+            
+            navLinks.forEach(link => {
+                link.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    
+                    const targetId = this.getAttribute('href').substring(1);
+                    
+                    // Hide all sections
+                    sections.forEach(section => {
+                        section.style.display = 'none';
+                    });
+                    
+                    // Show target section
+                    const targetSection = document.getElementById(targetId);
+                    if (targetSection) {
+                        targetSection.style.display = 'block';
+                    }
+                    
+                    // Update active nav link
+                    navLinks.forEach(nav => nav.classList.remove('active'));
+                    this.classList.add('active');
+                });
+            });
+            
+            // Show home section by default
+            document.getElementById('home').style.display = 'block';
+            document.querySelector('.nav-link[href="#home"]').classList.add('active');
+        });
+
+        // Utility functions
+        function formatCurrency(value) {
+            return new Intl.NumberFormat('ja-JP', {
+                style: 'currency',
+                currency: 'JPY'
+            }).format(value);
+        }
+
+        function formatPercentage(value) {
+            return (value * 100).toFixed(1) + '%';
+        }
+
+        function formatDate(dateString) {
+            const date = new Date(dateString);
+            return date.toLocaleDateString('ja-JP');
+        }
+
+        function showLoading(elementId) {
+            const element = document.getElementById(elementId);
+            if (element) {
+                element.innerHTML = '<div class="loading"><div class="spinner-border" role="status"><span class="visually-hidden">Loading...</span></div></div>';
+            }
+        }
+
+        function hideLoading(elementId) {
+            const element = document.getElementById(elementId);
+            if (element) {
+                element.innerHTML = '';
+            }
+        }
+
+        function showError(elementId, message) {
+            const element = document.getElementById(elementId);
+            if (element) {
+                element.innerHTML = `<div class="error">${message}</div>`;
+            }
+        }
+
+        // Form handling
+        document.querySelectorAll('form').forEach(form => {
+            form.addEventListener('submit', function(e) {
+                e.preventDefault();
+                alert('設定が保存されました。');
+            });
+        });
+    </script>
+</body>
+</html>
